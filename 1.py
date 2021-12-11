@@ -1,11 +1,7 @@
 # -*- coding: UTF-8 -*-
 import requests as req
 import json,sys,time
-#先注册azure应用,确保应用有以下权限:
-#files:	Files.Read.All、Files.ReadWrite.All、Sites.Read.All、Sites.ReadWrite.All
-#user:	User.Read.All、User.ReadWrite.All、Directory.Read.All、Directory.ReadWrite.All
-#mail:  Mail.Read、Mail.ReadWrite、MailboxSettings.Read、MailboxSettings.ReadWrite
-#注册后一定要再点代表xxx授予管理员同意,否则outlook api无法调用
+#由@蝶铃魔改 仅供自用
 
 
 
@@ -43,37 +39,37 @@ def main():
     'Content-Type':'application/json'
     }
     try:
-        if req.get(r'https://graph.microsoft.com/v1.0/me/drive/root',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/users',headers=headers).status_code == 200:#组织中的所有用户调用
             num1+=1
             print("1调用成功"+str(num1)+'次')
-        if req.get(r'https://graph.microsoft.com/v1.0/me/drive',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/users/${{ secrets.USER_ID }}/presence',headers=headers).status_code == 200:#用户当前状态调用
             num1+=1
             print("2调用成功"+str(num1)+'次')
-        if req.get(r'https://graph.microsoft.com/v1.0/drive/root',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/security/alerts?$top=1',headers=headers).status_code == 200:#警告
             num1+=1
             print('3调用成功'+str(num1)+'次')
-        if req.get(r'https://graph.microsoft.com/v1.0/users ',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/security/secureScores?$top=5',headers=headers).status_code == 200:#安全功能分数 (beta)
             num1+=1
             print('4调用成功'+str(num1)+'次')
-        if req.get(r'https://graph.microsoft.com/v1.0/me/messages',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/security/secureScoreControlProfiles?$top=5',headers=headers).status_code == 200:#安全功能分数控制配置文件 (beta)
             num1+=1
             print('5调用成功'+str(num1)+'次')    
-        if req.get(r'https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messageRules',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/identity/conditionalAccess/namedLocations',headers=headers).status_code == 200:#获取所有命名位置（beta 版本）
             num1+=1
             print('6调用成功'+str(num1)+'次')    
-        if req.get(r'https://graph.microsoft.com/v1.0/me/mailFolders/Inbox/messages/delta',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/identity/conditionalAccess/policies',headers=headers).status_code == 200:#获取所有条件访问策略
             num1+=1
             print('7调用成功'+str(num1)+'次')
-        if req.get(r'https://graph.microsoft.com/v1.0/me/drive/root/children',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/applications?$count=true',headers=headers).status_code == 200:#列出所有应用及计数
             num1+=1
             print('8调用成功'+str(num1)+'次')
-        if req.get(r'https://api.powerbi.com/v1.0/myorg/apps',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/identityProtection/riskDetections',headers=headers).status_code == 200:#获取风险检测
             num1+=1
             print('8调用成功'+str(num1)+'次') 
-        if req.get(r'https://graph.microsoft.com/v1.0/me/mailFolders',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/devices',headers=headers).status_code == 200:#列出 Azure AD 设备
             num1+=1
             print('9调用成功'+str(num1)+'次')
-        if req.get(r'https://graph.microsoft.com/v1.0/me/outlook/masterCategories',headers=headers).status_code == 200:
+        if req.get(r'https://graph.microsoft.com/beta/applications/${{ secrets.APP_ID }}',headers=headers).status_code == 200:#检索应用程序属性
             num1+=1
             print('10调用成功'+str(num1)+'次')
             print('此次运行结束时间为 :', localtime)
