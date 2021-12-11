@@ -1,11 +1,12 @@
 # -*- coding: UTF-8 -*-
 import requests as req
 import json,sys,time
+#!原作wangziyingwen/酷安ID-卷腿毛菌
+#!魔改BOOTV/酷安ID-蝶铃
 #先注册azure应用,确保应用有以下权限:
-#files:	Files.Read.All、Files.ReadWrite.All、Sites.Read.All、Sites.ReadWrite.All
-#user:	User.Read.All、User.ReadWrite.All、Directory.Read.All、Directory.ReadWrite.All
-#mail:  Mail.Read、Mail.ReadWrite、MailboxSettings.Read、MailboxSettings.ReadWrite
-#注册后一定要再点代表xxx授予管理员同意,否则outlook api无法调用
+#Directory.AccessAsUser.All IdentityRiskEvent.Read.All Policy.Read.All
+#Presence.Read.All SecurityEvents.ReadWrite.All User.Read.All
+#注册后一定要再点代表xxx授予管理员同意
 
 
 
