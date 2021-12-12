@@ -2,7 +2,7 @@
 import requests as req
 import json,sys,time
 #!原作wangziyingwen/酷安ID-卷腿毛菌
-#!魔改BOOTV/酷安ID-蝶铃
+#!魔改ShellCI/酷安ID-蝶铃
 #先注册azure应用,确保应用有以下权限:
 #Directory.AccessAsUser.All IdentityRiskEvent.Read.All Policy.Read.All
 #Presence.Read.All SecurityEvents.ReadWrite.All User.Read.All
@@ -81,5 +81,5 @@ def main():
     except:
         print("pass")
         pass
-for _ in range(3):
+for _ in range(1):
     main()
